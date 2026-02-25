@@ -1,0 +1,111 @@
+[gd_scene load_steps=11 format=3 uid="uid://c3dta4adp7qb5"]
+
+[ext_resource type="Material" uid="uid://bc33j8g1edo5l" path="res://tracksides.tres" id="1_hbghi"]
+[ext_resource type="PackedScene" uid="uid://sfh38w7ir50w" path="res://bike_06.tscn" id="2_hbghi"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ilcil"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_3hls8"]
+sky_material = SubResource("ProceduralSkyMaterial_ilcil")
+
+[sub_resource type="Environment" id="Environment_hbghi"]
+background_mode = 2
+sky = SubResource("Sky_3hls8")
+tonemap_mode = 2
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_hn12h"]
+size = Vector2(1000, 1000)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ihfcg"]
+albedo_color = Color(0.023505552, 0.21323341, 0, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3hls8"]
+size = Vector3(1000, 10, 1000)
+
+[sub_resource type="Curve3D" id="Curve3D_hbghi"]
+closed = true
+_data = {
+"points": PackedVector3Array(-48.286697, 0, 20.996216, 48.286697, 0, -20.996216, 248.35667, 7.3630295, 400.38776, 28.849121, 0, 72.61995, -28.849121, 0, -72.61995, 340.46173, 0, 215.56923, 42.606613, 0, 71.86464, -42.606613, 0, -71.86464, 184.50145, 3.1690216, 138.40364, -42.520462, 0, 21.877026, 42.520462, 0, -21.877026, 203.65993, 4.173691, 11.210728, -39.572937, 0, 42.467297, 39.572937, 0, -42.467297, 396.66766, 0, -22.186485, 23.976624, 0, 55.22708, -23.976624, 0, -55.22708, 398.87473, 17.504257, -216.06064, 54.02449, 0, 23.54303, -54.02449, 0, -23.54303, 230.17494, 25.21547, -374.4839, 45.263184, 0, 0.497406, -45.263184, 0, -0.497406, -62.14319, 39.642044, -364.87576, 33.9693, 0, -36.307434, -33.9693, 0, 36.307434, -287.01917, 1.8335342, -294.20142, -34.06639, 0, -11.2793045, 34.06639, 0, 11.2793045, -225.41827, 6.1120415, -125.39987, -47.750244, 0, -18.90107, 47.750244, 0, 18.90107, -34.396194, 5.496132, -141.47652, 3.979248, 0, -56.205883, -3.979248, 0, 56.205883, 36.99347, 3.4370346, -26.587234, 54.246613, -15.267288, -33.56398, -54.246613, 15.267288, 33.56398, -29.082222, 16.199982, 152.84354, 66.5117, 0, -20.324142, -66.5117, 0, 20.324142, -205.00673, 34.903275, 135.84058, 15.638428, 0, -60.43135, -15.638428, 0, 60.43135, -320.0329, 11.048065, 271.54553, -37.629272, 0, -35.346924, 37.629272, 0, 35.346924, -287.51343, 12.520752, 387.31268, -88.03931, 0, -1.9895935, 88.03931, 0, 1.9895935, -101.15987, 13.287476, 451.14764),
+"tilts": PackedFloat32Array(0, 0, 0.34849122, 0, 0, 0, 0, 0, 0, 0, 0.8884379, 0.565027, 0, 0, 0, 0, 0)
+}
+point_count = 17
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hn12h"]
+albedo_color = Color(0.20511743, 0.20511743, 0.20511743, 1)
+
+[node name="Level1" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_hbghi")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5095825, 0, -0.25479126)
+mesh = SubResource("PlaneMesh_hn12h")
+surface_material_override/0 = SubResource("StandardMaterial3D_ihfcg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+shape = SubResource("BoxShape3D_3hls8")
+
+[node name="Path3D" type="Path3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -4)
+curve = SubResource("Curve3D_hbghi")
+
+[node name="Track" type="CSGPolygon3D" parent="Path3D"]
+use_collision = true
+polygon = PackedVector2Array(-5, 0, -5, 0.1, 5, 0.1, 5, 0)
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_rotation_accurate = false
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = true
+material = SubResource("StandardMaterial3D_hn12h")
+
+[node name="RightSide" type="CSGPolygon3D" parent="Path3D"]
+use_collision = true
+polygon = PackedVector2Array(-5.5, 0, -5.5, 1, -5, 1, -5, 0)
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_rotation_accurate = false
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+material = ExtResource("1_hbghi")
+
+[node name="LeftSide" type="CSGPolygon3D" parent="Path3D"]
+use_collision = true
+polygon = PackedVector2Array(5.5, 0, 5.5, 1, 5, 1, 5, 0)
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_rotation_accurate = false
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+material = ExtResource("1_hbghi")
+
+[node name="Bike06" parent="Path3D" instance=ExtResource("2_hbghi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.99999, 4.773184, 0)

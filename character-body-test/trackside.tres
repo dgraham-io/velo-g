@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://q3k6dvrj5yhg"]
+
+[ext_resource type="Texture2D" uid="uid://dng4imcksf1oq" path="res://zinc-5898-in-architextures.jpg" id="1_qimx2"]
+
+[resource]
+albedo_color = Color(0.50140655, 0.5014065, 0.5014065, 1)
+albedo_texture = ExtResource("1_qimx2")

@@ -1,0 +1,7 @@
+	if Input.is_action_pressed("left"):
+		steer = deg_to_rad(-30.0)
+	elif Input.is_action_pressed("right"):
+		steer = deg_to_rad(30.0)
+	else:
+		steer = 0.0
+		

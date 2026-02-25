@@ -1,0 +1,68 @@
+[gd_scene load_steps=7 format=3 uid="uid://d0afrkfx4nc1i"]
+
+[ext_resource type="Script" uid="uid://dpqbxd5u8o01w" path="res://bike.gd" id="1_77p72"]
+[ext_resource type="PackedScene" uid="uid://b707y4rjabev0" path="res://player_origin.tscn" id="2_f5gm3"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_jymcu"]
+friction = 0.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_77p72"]
+size = Vector3(0.75, 1.25, 3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f5gm3"]
+albedo_color = Color(0, 1, 1, 0.76862746)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f5gm3"]
+size = Vector3(0.75, 1.25, 3)
+
+[node name="Bike" type="RigidBody3D"]
+collision_layer = 2
+collision_mask = 2
+mass = 10.0
+physics_material_override = SubResource("PhysicsMaterial_jymcu")
+linear_damp = 5.0
+angular_damp = 5.0
+script = ExtResource("1_77p72")
+hover_force = 1400
+turn_force = 50.0
+
+[node name="RemoteTransformRR" type="RemoteTransform3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 1.25)
+remote_path = NodePath("../RayRR")
+update_rotation = false
+
+[node name="RemoteTransformRL" type="RemoteTransform3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 1.25)
+remote_path = NodePath("../RayRL")
+update_rotation = false
+
+[node name="body" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_77p72")
+surface_material_override/0 = SubResource("StandardMaterial3D_f5gm3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_f5gm3")
+
+[node name="RemoteTransformFL" type="RemoteTransform3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -1.25)
+remote_path = NodePath("../RayFL")
+update_rotation = false
+
+[node name="RemoteTransformFR" type="RemoteTransform3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -1.25)
+remote_path = NodePath("../RayFR")
+update_rotation = false
+
+[node name="RayFL" type="RayCast3D" parent="." groups=["Raycasts"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -1.25)
+
+[node name="RayRL" type="RayCast3D" parent="." groups=["Raycasts"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 1.25)
+
+[node name="RayFR" type="RayCast3D" parent="." groups=["Raycasts"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -1.25)
+
+[node name="RayRR" type="RayCast3D" parent="." groups=["Raycasts"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 1.25)
+
+[node name="PlayerOrigin" parent="." instance=ExtResource("2_f5gm3")]

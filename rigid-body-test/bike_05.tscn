@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=3 uid="uid://xdannby5cw5f"]
+
+[ext_resource type="Script" uid="uid://druueoudja0su" path="res://bike_05.gd" id="1_t8wyn"]
+
+[sub_resource type="Curve" id="Curve_t8wyn"]
+_data = [Vector2(0, 0.4), 0.0, 0.0, 0, 0, Vector2(0.4, 1), 0.0, 0.0, 0, 0, Vector2(0.90000004, 0.5), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+metadata/_snap_enabled = true
+
+[node name="Bike05" type="RigidBody3D"]
+mass = 100.0
+script = ExtResource("1_t8wyn")
+accel_curve = SubResource("Curve_t8wyn")
+tire_turn_speed = 0.5
+tire_max_turn_degree = 3.0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.9311322, 0.36468178, 0, -0.36468178, 0.9311322, 0, 3.0210202, 4.0276346)
+
+[node name="RayLeft" type="RayCast3D" parent="." groups=["Rays"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0)
+target_position = Vector3(0, -2, 0)
+
+[node name="RayRight" type="RayCast3D" parent="." groups=["Rays"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0)
+target_position = Vector3(0, -2, 0)
+
+[node name="RayRear" type="RayCast3D" parent="." groups=["Rays"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.8)
+target_position = Vector3(0, -2, 0)
+
+[node name="RayFront" type="RayCast3D" parent="." groups=["Rays"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.8)
+target_position = Vector3(0, -2, 0)

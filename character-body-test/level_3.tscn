@@ -1,0 +1,81 @@
+[gd_scene load_steps=10 format=3 uid="uid://bthlttx5byakf"]
+
+[ext_resource type="Texture2D" uid="uid://clktsew7r27wf" path="res://forrest_2.jpg" id="1_1fhj5"]
+[ext_resource type="PackedScene" uid="uid://c5s1qgmt4o2h8" path="res://bike_06.tscn" id="1_ayd5w"]
+[ext_resource type="Texture2D" uid="uid://bntlc7sf02fft" path="res://dirt.webp" id="2_16pka"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_pree8"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_ayd5w"]
+sky_material = SubResource("ProceduralSkyMaterial_pree8")
+
+[sub_resource type="Environment" id="Environment_1fhj5"]
+background_mode = 2
+sky = SubResource("Sky_ayd5w")
+tonemap_mode = 2
+
+[sub_resource type="Curve3D" id="Curve3D_16pka"]
+closed = true
+_data = {
+"points": PackedVector3Array(1.8695977, 3.6229553, 41.371674, -1.8695977, -3.6229553, -41.371674, 0.5180672, -0.14019775, 176.11972, 0.20983958, -0.018432617, 23.035637, -0.20983958, 0.018432617, -23.035637, 2.0621338, 8.115176, -113.92851, 0.2148745, -0.023620605, 29.830673, -0.2148745, 0.023620605, -29.830673, 2.5775146, -4.6358786, -195.643, -1.3425812, -0.0138549805, 17.453766, 1.3425812, 0.0138549805, -17.453766, 0, 10.44987, -258.3207, -1.3052323, -0.014038086, 17.261719, 1.3052323, 0.014038086, -17.261719, 3.6560974, -5.1739664, -326.71964, -1.8798771, -0.012756348, 15.780518, 1.8798771, 0.012756348, -15.780518, -2.646515, 8.172859, -369.31302, 16.565292, -3.8435993, 39.274384, -16.565292, 3.8435993, -39.274384, 1.5211182, 9.160463, -482.94656, 51.3304, -0.0016479492, 1.9848022, -51.3304, 0.0016479492, -1.9848022, -191.27713, 30.494423, -556.8634, 45.853577, 0.018432617, -23.357056, -45.853577, -0.018432617, 23.357056, -404.68906, 0.4179077, -524.291, 31.258606, 0.041503906, -52.180054, -31.258606, -0.041503906, 52.180054, -569.12384, 10.28884, -301.95612, -1.928894, 0.02520752, -31.312397, 1.928894, -0.02520752, 31.312397, -645.4402, 16.003294, 59.86582, -4.335083, 0.023010254, -29.085182, 4.335083, -0.023010254, 29.085182, -631.5209, -0.09802246, 123.72665, -3.126892, 0.022949219, -28.700424, 3.126892, -0.022949219, 28.700424, -613.47754, 24.623714, 210.90295, 0.9226074, 0.020446777, -25.743286, -0.9226074, -0.020446777, 25.743286, -616.5705, -0.23669434, 297.9748, -2.0256958, 0.023010254, -28.967133, 2.0256958, -0.023010254, 28.967133, -607.0388, 16.161873, 380.3338, -19.688416, 0.019104004, -24.082062, 19.688416, -0.019104004, 24.082062, -587.1853, -1.9188614, 458.5479, -18.609802, 0.015136719, -18.762146, 18.609802, -0.015136719, 18.762146, -533.92053, 17.044037, 528.6791, -39.411804, 0.0028686523, -3.6739502, 39.411804, -0.0028686523, 3.6739502, -378.01852, 15.327614, 605.376, -36.97522, -0.012573242, 15.643982, 36.97522, 0.012573242, -15.643982, -193.49542, 26.779625, 579.5977, -18.569374, -0.020568848, 25.937683, 18.569374, 0.020568848, -25.937683, -96.482925, 5.654892, 523.75256, -18.477203, -1.8321838, 36.838715, 18.477203, 1.8321838, -36.838715, -47.853333, 36.535248, 375.35846, -18.936304, 2.4407654, 42.543213, 18.936304, -2.4407654, -42.543213, -14.367554, 18.141743, 274.4544),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 22
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j8bo8"]
+albedo_color = Color(0.69612974, 0.47344387, 0, 1)
+albedo_texture = ExtResource("2_16pka")
+uv1_scale = Vector3(1, 32, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_16pka"]
+albedo_texture = ExtResource("1_1fhj5")
+uv1_scale = Vector3(1, 256, 1)
+
+[node name="Level3" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1fhj5")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_16pka")
+
+[node name="Trail" type="CSGPolygon3D" parent="Path3D"]
+use_collision = true
+polygon = PackedVector2Array(-5, 0, -5, 0.005, 5, 0.005, 5, 0)
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_rotation_accurate = false
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = true
+material = SubResource("StandardMaterial3D_j8bo8")
+
+[node name="Floor" type="CSGPolygon3D" parent="Path3D"]
+use_collision = true
+polygon = PackedVector2Array(50, -1, 50, 0, -50, 0, -50, -1)
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_rotation_accurate = false
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+material = SubResource("StandardMaterial3D_16pka")
+
+[node name="Bike06" parent="." instance=ExtResource("1_ayd5w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.3246, 0)

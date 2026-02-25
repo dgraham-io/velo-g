@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://dwo1hawfplanm"]
+
+[ext_resource type="Script" uid="uid://dj0hmr331n21k" path="res://cycle.gd" id="1_m2ieh"]
+[ext_resource type="PackedScene" uid="uid://b707y4rjabev0" path="res://player_origin.tscn" id="2_b2al5"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_b2al5"]
+friction = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ig7tw"]
+albedo_color = Color(0.10980392, 0.92941177, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0xm2m"]
+material = SubResource("StandardMaterial3D_ig7tw")
+size = Vector3(0.5, 1, 2)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_b2al5"]
+radius = 0.6
+
+[node name="cycle" type="RigidBody3D"]
+mass = 100.0
+physics_material_override = SubResource("PhysicsMaterial_b2al5")
+script = ExtResource("1_m2ieh")
+
+[node name="Body" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_0xm2m")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_b2al5")
+
+[node name="FrontRayCast" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+
+[node name="RearRayCast" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+
+[node name="PlayerOrigin" parent="." instance=ExtResource("2_b2al5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2215462, 2.2841866)

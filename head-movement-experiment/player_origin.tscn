@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://b707y4rjabev0"]
+
+[ext_resource type="Script" uid="uid://dtleg6k6q6g6n" path="res://player_origin.gd" id="1_p7bcu"]
+
+[node name="PlayerOrigin" type="XROrigin3D"]
+top_level = true
+script = ExtResource("1_p7bcu")
+
+[node name="XRCamera3D" type="XRCamera3D" parent="."]
+current = true

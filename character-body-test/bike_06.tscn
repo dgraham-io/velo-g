@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://c5s1qgmt4o2h8"]
+
+[ext_resource type="PackedScene" uid="uid://bae1m404m42r" path="res://bike06.glb" id="1_hfusb"]
+[ext_resource type="Script" uid="uid://bua8yvcvqgm8g" path="res://bike_06.gd" id="2_xiacu"]
+[ext_resource type="Script" uid="uid://sscyf28k8d1e" path="res://xr_origin_3d.gd" id="3_cqb7o"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hfusb"]
+albedo_color = Color(0.35452148, 0.99999994, 0.99853975, 0.7254902)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_xiacu"]
+points = PackedVector3Array(0.21134296, 0.686655, 0.97550035, -0.16516547, -0.91994804, -0.8908096, -0.38353026, -0.51214844, -0.91916925, -0.061830387, -0.45719108, 1.9132571, 0.4131257, -0.45304853, -0.9010449, -0.22711825, 0.6817849, -0.8868861, -0.4438545, 0.2973779, 1.0215791, 0.4131257, -0.45304853, 0.9437265, 0.43760502, 0.30764177, -1.0208583, -0.120000854, -0.9744196, 1.0416132, 0.046856903, -0.47116175, -1.5701379, 0.046290636, 0.3013467, 1.9639031, 0.15256387, -0.9433145, -0.9224662, -0.44936615, 0.3025417, -1.0058916, 0.42340854, 0.29434127, 1.0696335, -0.382059, -0.51057196, 1.0060232, 0.047424912, 0.3098549, -1.5883284, -0.22711825, 0.6817849, 0.9707983, 0.21134296, 0.686655, -0.89360446, 0.15178496, -0.93928903, 1.0076355, 0.045732066, -0.4638448, 1.9460149, -0.008602381, 0.7492443, -0.9586922, -0.06331526, -0.4668652, -1.5489849, -0.06219877, 0.29225186, 1.925073, -0.008602381, 0.7492443, 0.9821465, -0.06393376, 0.3052864, -1.5688235, -0.42442453, -0.2402118, 0.93339455, -0.39592844, -0.47017458, -1.0115091, 0.3741567, -0.465853, -1.0516993, -0.008602381, -0.9219932, -1.0813873, 0.30893016, 0.55090386, 0.94661057, 0.36685166, -0.45906916, 1.1173229)
+
+[node name="Bike06" node_paths=PackedStringArray("bike_mesh") instance=ExtResource("1_hfusb")]
+script = ExtResource("2_xiacu")
+bike_mesh = NodePath("Cube")
+
+[node name="Cube" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_hfusb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="1"]
+shape = SubResource("ConvexPolygonShape3D_xiacu")
+
+[node name="PlayerOrigin" type="XROrigin3D" parent="." index="2"]
+script = ExtResource("3_cqb7o")
+
+[node name="XRCamera3D" type="XRCamera3D" parent="PlayerOrigin" index="0"]
+
+[node name="Camera3D" type="Camera3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.967402, 7.571391)
+current = true

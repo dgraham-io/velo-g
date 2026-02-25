@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=3 uid="uid://bcb72fm1hef1o"]
+
+[ext_resource type="Script" uid="uid://my2ojojl44kp" path="res://bike_02.gd" id="1_sveas"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_pnkyp"]
+size = Vector3(0.75, 1.25, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kpmal"]
+size = Vector3(0.75, 1.25, 2)
+
+[node name="Bike02" type="VehicleBody3D"]
+mass = 100.0
+script = ExtResource("1_sveas")
+spring_preload = 5.0
+damping = 50.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_pnkyp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_kpmal")
+
+[node name="RayFL" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0, -0.8)
+target_position = Vector3(0, -2, 0)
+
+[node name="RayRL" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0, 0.8)
+target_position = Vector3(0, -2, 0)
+
+[node name="RayFR" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0, -0.8)
+target_position = Vector3(0, -2, 0)
+
+[node name="RayRR" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0, 0.8)
+target_position = Vector3(0, -2, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.92391294, 0.38260278, 0, -0.38260278, 0.92391294, 0, 2.9375343, 3.8512611)
+current = true

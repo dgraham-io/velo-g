@@ -1,0 +1,66 @@
+[gd_scene load_steps=5 format=3 uid="uid://dp7v0n4jkey2r"]
+
+[ext_resource type="Script" uid="uid://41rshhb0bxs6" path="res://bike.gd" id="1_77p72"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_jymcu"]
+friction = 0.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_77p72"]
+size = Vector3(0.75, 1.25, 3)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_77p72"]
+height = 3.0
+
+[node name="Bike" type="RigidBody3D"]
+collision_layer = 2
+collision_mask = 2
+mass = 10.0
+physics_material_override = SubResource("PhysicsMaterial_jymcu")
+linear_damp = 5.0
+angular_damp = 5.0
+script = ExtResource("1_77p72")
+hover_force = 1000
+turn_force = 50.0
+
+[node name="RemoteTransformRear" type="RemoteTransform3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.25)
+remote_path = NodePath("../RayRear")
+update_rotation = false
+
+[node name="RemoteTransformLeft" type="RemoteTransform3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0)
+remote_path = NodePath("../RayLeft")
+update_rotation = false
+
+[node name="body" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.16019604, 0)
+mesh = SubResource("BoxMesh_77p72")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_77p72")
+
+[node name="RemoteTransformFront" type="RemoteTransform3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.25)
+remote_path = NodePath("../RayFront")
+update_rotation = false
+
+[node name="RemoteTransformRight" type="RemoteTransform3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0)
+remote_path = NodePath("../RayRight")
+update_rotation = false
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.86602545, 0.5, 0, -0.5, 0.86602545, 0, 4, 4)
+
+[node name="RayFront" type="RayCast3D" parent="." groups=["CenterRays", "Raycasts"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.25)
+
+[node name="RayLeft" type="RayCast3D" parent="." groups=["Raycasts"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0)
+
+[node name="RayRight" type="RayCast3D" parent="." groups=["Raycasts"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0)
+
+[node name="RayRear" type="RayCast3D" parent="." groups=["CenterRays", "Raycasts"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.25)
