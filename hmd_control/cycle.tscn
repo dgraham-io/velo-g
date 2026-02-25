@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://cthui7fiq64no"]
+
+[ext_resource type="Script" uid="uid://cnvr61prs06xa" path="res://cycle.gd" id="1_b2al5"]
+[ext_resource type="Material" uid="uid://c7ysmpvjyog1i" path="res://bike_blue.tres" id="1_m2ieh"]
+[ext_resource type="PackedScene" uid="uid://bbw8f5e5peati" path="res://player_origin.tscn" id="3_b5t5u"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_b5t5u"]
+size = Vector3(0.5, 2, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pvufr"]
+size = Vector3(0.5, 2, 3)
+
+[node name="Cycle" type="Node3D"]
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+mass = 100.0
+script = ExtResource("1_b2al5")
+spring_strength = 200.0
+spring_damping = 200.0
+rest_dist = 0.25
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+mesh = SubResource("BoxMesh_b5t5u")
+surface_material_override/0 = ExtResource("1_m2ieh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("BoxShape3D_pvufr")
+
+[node name="RayLF" type="RayCast3D" parent="RigidBody3D" groups=["RayCasts"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -1)
+
+[node name="RayLR" type="RayCast3D" parent="RigidBody3D" groups=["RayCasts"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 1)
+
+[node name="RayRF" type="RayCast3D" parent="RigidBody3D" groups=["RayCasts"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -1)
+
+[node name="RayRR" type="RayCast3D" parent="RigidBody3D" groups=["RayCasts"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 1)
+
+[node name="PlayerOrigin" parent="." instance=ExtResource("3_b5t5u")]

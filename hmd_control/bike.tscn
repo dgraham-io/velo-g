@@ -1,0 +1,61 @@
+[gd_scene load_steps=6 format=3 uid="uid://coohj12ydlcry"]
+
+[ext_resource type="Script" uid="uid://dvvggd3hf7bm7" path="res://bike.gd" id="1_f5gm3"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0xm2m"]
+friction = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h2yge"]
+albedo_color = Color(0.043137256, 0.7137255, 0.85490197, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7dm0k"]
+material = SubResource("StandardMaterial3D_h2yge")
+size = Vector3(0.75, 1.25, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ig7tw"]
+size = Vector3(0.75, 1.25, 3)
+
+[node name="Bike" type="RigidBody3D"]
+mass = 10.0
+physics_material_override = SubResource("PhysicsMaterial_0xm2m")
+linear_damp = 5.0
+angular_damp = 5.0
+script = ExtResource("1_f5gm3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_7dm0k")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_ig7tw")
+
+[node name="RayLF" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 8.940697e-08, 0, -8.940697e-08, 1, -0.4, 0, -1)
+
+[node name="RayLR" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 8.940697e-08, 0, -8.940697e-08, 1, -0.4, 0, 1)
+
+[node name="RayRF" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 8.940697e-08, 0, -8.940697e-08, 1, 0.4, 0, -1)
+
+[node name="RayRR" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 8.940697e-08, 0, -8.940697e-08, 1, 0.4, 0, 1)
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0, -1)
+remote_path = NodePath("../RayLF")
+update_rotation = false
+
+[node name="RemoteTransform3D2" type="RemoteTransform3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0, 1)
+remote_path = NodePath("../RayLR")
+update_rotation = false
+
+[node name="RemoteTransform3D3" type="RemoteTransform3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0, -1)
+remote_path = NodePath("../RayRF")
+update_rotation = false
+
+[node name="RemoteTransform3D4" type="RemoteTransform3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0, 1)
+remote_path = NodePath("../RayRR")
+update_rotation = false
